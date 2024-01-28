@@ -6,7 +6,7 @@ import re
 url= "https://www.jumia.co.ke/smart-tvs-2282"
 
 # Product page Scrapper
-def get_pagecontent():
+def get_pagecontent(url):
     '''
     This helper function helps get the content from the site 
     and then gets to the required division so as to get the 
@@ -22,11 +22,9 @@ def get_pagecontent():
 
     response =requests.get(url)
 
-    soup = BeautifulSoup(response.content, "html.parser")
+    soup_content = BeautifulSoup(response.content, "html.parser")
 
-    print(soup)
-
-    return(soup)
+    return soup_content
 
 
 
@@ -176,21 +174,21 @@ rating = getproductrating(soup)
 list_of_lists = [name,price,discount,review,rating]
 
 ## Save and review the product data
-with open('jumia_products.csv', 'w') as jumia_file:
-    fieldnames = ["name", "brand", "price", "discount", "reviews", "rating"]
+with open('jumia_products.csv', 'w') as csvfile:
+    fieldnames = ["name","price", "discount", "review", "rating"]
 
-    csvwriter = csv.____(jumia_file)
-    csvwriter._____(fieldnames)
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(fieldnames)
 
     #loop through product list to update csv file
-    for ____ in _____:
-        csvwriter._____(product)
+    for fieldname in fieldnames:
+        csvwriter.writerow(fieldnames)
 
     print("Done! All products have been added to CSV file")
 
 ## Using pandas to do data manipulation
-jumia = pd.read_csv('jumia_products.csv')
-jumia.head(10)
+#jumia = pd.read_csv('jumia_products.csv')
+#jumia.head(10)
 
 
 
