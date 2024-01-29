@@ -54,11 +54,9 @@ def getproductname(soup):
     
     product_name = []
 
-    product_name = soup.find_all ('h3',class_='name')
+    product_name = soup.find_all('h3',class_='name')
 
-    #print(product_name)
-
-    return (product_name)
+    return (product_name.text.strip())
     
     ## Retrieve Brand Name
 #def getproductbrand(soup):
@@ -193,16 +191,17 @@ rating = getproductrating(soup)
 
 list_of_lists = [name,price,discount,review,rating]
 
+print(list_of_lists)
+
 ## Save and review the product data
 with open('jumia_products.csv', 'w') as csvfile:
     fieldnames = ["product_name","price", "discount", "review", "rating"]
-
     csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(fieldnames)
+    csvwriter.writerow(list_of_lists)
 
     #loop through product list to update csv file
     for fieldname in fieldnames:
-        csvwriter.writerow(fieldnames)
+        csvwriter.writerow(list_of_lists)
 
     print("Done! All products have been added to CSV file")
 
