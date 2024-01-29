@@ -56,7 +56,7 @@ def getproductname(soup):
 
     product_name = soup.find_all('h3',class_='name')
 
-    return (product_name.text.strip())
+    return (product_name.text)
     
     ## Retrieve Brand Name
 #def getproductbrand(soup):
