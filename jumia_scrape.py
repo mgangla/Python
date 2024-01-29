@@ -2,8 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import re
+import time 
 
 url= "https://www.jumia.co.ke/smart-tvs-2282"
+
+time.sleep(2)
 
 # Product page Scrapper
 def get_pagecontent(url):
@@ -18,13 +21,21 @@ def get_pagecontent(url):
     '''
     # begin code here.
 #url to scrape smart tvs
-    url= "https://www.jumia.co.ke/smart-tvs-2282/"
+    fixed_url= "https://www.jumia.co.ke/smart-tvs-2282/"
 
-    response =requests.get(url)
+      # we should scroll through all 41 pages on smart tvs
+    start_page =1
+    last_page =41
+ 
+    for page_number in range (start_page,last_page+1):
+      url= fixed_url.format(page_number)
+      response =requests.get(url)
 
-    soup_content = BeautifulSoup(response.content, "html.parser")
+    soup = BeautifulSoup(response.content, "html.parser")
 
-    return soup_content
+    #print(soup)
+
+    return soup
 
 
 
@@ -43,9 +54,11 @@ def getproductname(soup):
     
     product_name = []
 
-    for name in soup.find_all ('h3',class_='name') :
+    product_name = soup.find_all ('h3',class_='name')
 
-      return (product_name)
+    #print(product_name)
+
+    return (product_name)
     
     ## Retrieve Brand Name
 #def getproductbrand(soup):
@@ -76,9 +89,11 @@ def getproductprice(soup):
 
     product_price = []
 
-    for price in soup.find_all ('div',class_='prc') :
+    product_price= soup.find_all ('div',class_='prc') 
+
+    #print(product_price)
     
-      return product_price
+    return product_price
 
 ## Retrieve the Discount
 def getproductdiscount(soup):
@@ -93,10 +108,11 @@ def getproductdiscount(soup):
     # begin code here
 
     product_discount = []
-    for discount in soup.find_all ('div',class_='bdg_dsct_s') :
 
-    
-      return product_discount
+    product_discount = soup.find_all ('div',class_='bdg _dsct _sm')
+
+    #print(product_discount)
+    return product_discount
 ## Retrieve the Number of reviews.
 def getproductreviewcnt(soup):
     '''
@@ -111,9 +127,11 @@ def getproductreviewcnt(soup):
 
     product_reviews = []
 
-    for reviews in soup.find_all ('div',class_='rev') :
+    product_reviews= soup.find_all ('div',class_='rev') 
+
+    #print(product_reviews)
     
-      return product_reviews
+    return product_reviews
 ## Retrieve the ratings.
 def getproductrating(soup):
     '''
@@ -128,10 +146,12 @@ def getproductrating(soup):
 
     product_rating = []
 
-    for rating in soup.find_all ('div',class_='stars_s') :
+    product_rating = soup.find_all ('div',class_='stars _s') 
+
+    #print(product_rating)
 
     
-     return product_rating
+    return product_rating
 ## Retrieve the remaining stock.
 # getproductcount(soup):
     '''
@@ -175,7 +195,7 @@ list_of_lists = [name,price,discount,review,rating]
 
 ## Save and review the product data
 with open('jumia_products.csv', 'w') as csvfile:
-    fieldnames = ["name","price", "discount", "review", "rating"]
+    fieldnames = ["product_name","price", "discount", "review", "rating"]
 
     csvwriter = csv.writer(csvfile)
     csvwriter.writerow(fieldnames)

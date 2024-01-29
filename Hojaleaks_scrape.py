@@ -38,5 +38,5 @@ for heading in headings:
         images = images.find_all('img').text.strip()
         read_times = read_times.find_all('span', class_ ="flex.items-center").text.strip()
 
-        data.append({'headings': headings, 'images': images, 'read_times' :read_times description})
+        data.append[{'headings': headings, 'images': images, 'read_times' :read_times description}]
 
