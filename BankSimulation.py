@@ -40,14 +40,14 @@ class BankAccount :
 #execute the code
 #instance of the bank account object
         
-myBankAccount = BankAccount()
+        myBankAccount = BankAccount()
 
 
   
 # Calling functions with that class object
-print(myBankAccount.get_balance())
-myBankAccount.check_balance()
-myBankAccount.deposit()
-myBankAccount.withdraw()
-myBankAccount.thanks()
+        print(myBankAccount.get_balance())
+        myBankAccount.check_balance()
+        myBankAccount.deposit()
+        myBankAccount.withdraw()
+        myBankAccount.thanks()
 
