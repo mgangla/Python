@@ -26,7 +26,7 @@ class BankAccount:
                 amount = float(input("Enter amount to be withdrawn: "))
                 if self.__balance >= amount:
                         self.__balance -= amount
-                        return("\n You Withdrew:", amount)
+                        return("\n  You Withdrew:", amount)
                 else:
                         return("\n Insufficient balance  ")
 
